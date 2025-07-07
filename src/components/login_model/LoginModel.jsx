@@ -10,17 +10,34 @@ const LoginModel = ({ onSuccess }) => {
   const [step, setStep] = useState("email");
   const [error, setError] = useState("");
 
+  // const handleEmailSubmit = async () => {
+  //   try {
+  //     const res = await fetch(`${API}/users/login?email=${email}`);
+  //     if (res.ok) {
+  //       setStep("code");
+  //       setError("");
+  //     } else {
+  //       setError("Failed to send code.");
+  //     }
+  //   } catch {
+  //     setError("Server error.");
+  //   }
+  // };
+
   const handleEmailSubmit = async () => {
     try {
       const res = await fetch(`${API}/users/login?email=${email}`);
-      if (res.ok) {
-        setStep("code");
+      const data = await res.json();
+
+      if (res.ok && data.sucessful) {
+        setStep("code"); // ✅ Move to code input
         setError("");
       } else {
-        setError("Failed to send code.");
+        setError(data.message || "Failed to send code.");
       }
-    } catch {
+    } catch (err) {
       setError("Server error.");
+      console.error("Error sending email code:", err);
     }
   };
 
