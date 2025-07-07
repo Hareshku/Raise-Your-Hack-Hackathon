@@ -2,7 +2,8 @@ import { useState } from "react";
 import styles from "./LoginModel.module.css";
 import Cookies from "js-cookie";
 
-const API = "https://arccorpbackendprosustrack-production.up.railway.app/api";
+const API = "/api";
+
 
 const LoginModel = ({ onSuccess }) => {
   const [email, setEmail] = useState("");
