@@ -1,0 +1,50 @@
+.message-bubble {
+  max-width: 70%;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  word-wrap: break-word;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.user {
+  background-color: #4a4a4a;
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.ai {
+  background-color: #000;
+  color: #e0e0e0;
+  align-self: flex-start;
+  border: 1px solid #3a3a3a;
+}
+
+.message-content {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.message-timestamp {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  align-self: flex-end;
+  margin-top: 0.25rem;
+}
+
+.userTimestamp {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.aiTimestamp {
+  color: rgba(224, 224, 224, 0.7);
+}
+
+@media (max-width: 768px) {
+  .message-bubble {
+    max-width: 85%;
+  }
+}

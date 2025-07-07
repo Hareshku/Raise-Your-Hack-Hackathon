@@ -1,0 +1,31 @@
+
+.main-chat {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #2a2a2a;
+}
+
+.chat-header {
+  background-color: #2a2a2a;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #3a3a3a;
+  text-align: center;
+}
+
+.chat-header h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+
+  .chat-header h1{
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 15px 0px 0px 0px;
+  }
+}

@@ -1,0 +1,143 @@
+
+.result-card {
+  background-color: #000;
+  border: 1px solid #3a3a3a;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.result-card:hover {
+  background-color: #333333;
+  border-color: #4a4a4a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.card-image {
+  flex-shrink: 0;
+  width: 90px;
+  height: 110px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.hotel-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stars {
+  display: flex;
+  gap: 0.1rem;
+}
+
+.star {
+  font-size: 1rem;
+  color: #ffd700;
+}
+
+.star-filled {
+  color: #ffd700;
+}
+
+.star-half {
+  color: #dfcd8c;
+  opacity: 0.6;
+}
+
+.star-empty {
+  color: #4a4a4a;
+}
+.price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #00d4ff;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.view-button {
+  background-color: #000;        /* Dark background */
+  color: #fff;                   /* White text */
+  border: 1px solid #333;        /* Subtle border */
+  border-radius: 8px;            /* Rounded corners */
+  padding: 8px 16px;             /* Spacing */
+  font-size: 14px;               /* Match font size */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.view-button:hover {
+  background-color: #222;
+}
+
+.location {
+  font-size: 0.85rem;
+  color: #bbbbbb;
+  margin-top: -2px;
+}
+
+.details {
+  font-size: 0.85rem;
+  color: #999999;
+  line-height: 1.4;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.rating-number {
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+
+@media (max-width: 768px) {
+  .result-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 120px;
+  }
+  
+  .view-button {
+    align-self: stretch;
+  }
+}
