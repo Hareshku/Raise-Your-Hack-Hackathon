@@ -4,26 +4,11 @@ import Cookies from "js-cookie";
 
 const API = "/api";
 
-
 const LoginModel = ({ onSuccess }) => {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [step, setStep] = useState("email");
   const [error, setError] = useState("");
-
-  // const handleEmailSubmit = async () => {
-  //   try {
-  //     const res = await fetch(`${API}/users/login?email=${email}`);
-  //     if (res.ok) {
-  //       setStep("code");
-  //       setError("");
-  //     } else {
-  //       setError("Failed to send code.");
-  //     }
-  //   } catch {
-  //     setError("Server error.");
-  //   }
-  // };
 
   const handleEmailSubmit = async () => {
     try {
@@ -49,7 +34,7 @@ const LoginModel = ({ onSuccess }) => {
       if (res.ok && data.jwtAuthKey) {
         Cookies.set("authToken", data.jwtAuthKey, { expires: 7 });
         Cookies.set("userEmail", email, { expires: 7 });
-        onSuccess(data.jwtAuthKey);
+        onSuccess(email);
       } else {
         setError("Invalid code.");
       }

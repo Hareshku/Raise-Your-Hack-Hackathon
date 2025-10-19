@@ -4,7 +4,7 @@ import ResultCard from "../result_card/ResultCard";
 import TypingIndicator from "../typing_indicator/TypingIndicator";
 import styles from "./ChatWindow.module.css";
 
-const ChatWindow = ({ messages, isTyping, onHotelClick }) => {
+const ChatWindow = ({ messages = [], isTyping, onHotelClick }) => {
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {

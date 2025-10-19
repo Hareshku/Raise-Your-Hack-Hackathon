@@ -10,7 +10,55 @@ const MainChat = ({ authToken, messages, setMessages, onSendMessage }) => {
   const [selectedHotel, setSelectedHotel] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSendMessage = (content) => {
+  // const handleSendMessage = (content) => {
+  //   const userMessage = {
+  //     id: Date.now(),
+  //     role: "user",
+  //     content,
+  //     timestamp: new Date(),
+  //   };
+
+  //   const updated = [...messages, userMessage];
+  //   // setMessages(updated);
+  //   onSendMessage(userMessage);
+  //   setIsTyping(true);
+
+  //   setTimeout(() => {
+  //     const response = generateAIResponse(content);
+  //     const updatedWithAI = [...updated, response];
+  //     // setMessages(updatedWithAI);
+  //     setIsTyping(false);
+
+  //     if (
+  //       content.toLowerCase().includes("tokyo") ||
+  //       content.toLowerCase().includes("travel")
+  //     ) {
+  //       setTimeout(() => {
+  //         const hotelMessage = {
+  //           id: Date.now() + 1,
+  //           role: "assistant",
+  //           type: "universal-response",
+  //           timestamp: new Date(),
+  //           hasCards: true,
+  //           message: "Here are some great hotel options for your Tokyo trip:",
+  //           cards: hotelData.map((hotel) => ({
+  //             title: hotel.name,
+  //             image: hotel.image,
+  //             price: hotel.price,
+  //             rating: hotel.rating,
+  //             location: hotel.location,
+  //             details: hotel.amenities.join(", "),
+  //           })),
+  //         };
+  //         setMessages([...updatedWithAI, hotelMessage]);
+  //       }, 1000);
+  //     }
+  //   }, 1500);
+  // };
+
+  const handleSendMessage = async (content) => {
+    const token = localStorage.getItem("authToken");
+
     const userMessage = {
       id: Date.now(),
       role: "user",
@@ -18,42 +66,43 @@ const MainChat = ({ authToken, messages, setMessages, onSendMessage }) => {
       timestamp: new Date(),
     };
 
-    const updated = [...messages, userMessage];
-    // setMessages(updated);
-    onSendMessage(userMessage);
+    onSendMessage(userMessage); // store in local state
     setIsTyping(true);
 
-    setTimeout(() => {
-      const response = generateAIResponse(content);
-      const updatedWithAI = [...updated, response];
-      // setMessages(updatedWithAI);
-      setIsTyping(false);
+    try {
+      const res = await fetch(
+        "https://arccorpbackendprosustrack-production.up.railway.app/api/users/prompt",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chatId: activeChatId, // coming from props or context
+            userMessage: content,
+          }),
+        }
+      );
+      console.log(res);
+      const data = await res.json();
 
-      if (
-        content.toLowerCase().includes("tokyo") ||
-        content.toLowerCase().includes("travel")
-      ) {
-        setTimeout(() => {
-          const hotelMessage = {
-            id: Date.now() + 1,
-            role: "assistant",
-            type: "universal-response",
-            timestamp: new Date(),
-            hasCards: true,
-            message: "Here are some great hotel options for your Tokyo trip:",
-            cards: hotelData.map((hotel) => ({
-              title: hotel.name,
-              image: hotel.image,
-              price: hotel.price,
-              rating: hotel.rating,
-              location: hotel.location,
-              details: hotel.amenities.join(", "),
-            })),
-          };
-          setMessages([...updatedWithAI, hotelMessage]);
-        }, 1000);
+      if (res.ok && data.assistantMessage) {
+        const assistantMessage = {
+          id: Date.now() + 1,
+          role: "assistant",
+          content: data.assistantMessage,
+          timestamp: new Date(),
+        };
+        onSendMessage(assistantMessage);
+      } else {
+        console.error("AI response error:", data);
       }
-    }, 1500);
+    } catch (err) {
+      console.error("Error sending prompt:", err);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   const generateAIResponse = (userInput) => {
