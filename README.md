@@ -1,3 +1,10 @@
+**ArcCommerce: AI-Powered Travel Booking
+ArcCorp Hackathon 2025**
+
+**ArcCommerce** is an AI-driven travel booking solution built for the Prosus Track. It uses a proprietary SynapTran architecture to convert user intent to APIs and decouples natural language from raw LLM behavior. The system introduces an intent-routing core for safe and controlled LLM usage, ensuring traceability, backend logic control, and security. It is positioned as a next-gen e-commerce engine for structured and intelligent travel booking.
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
